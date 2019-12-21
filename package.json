@@ -1,0 +1,24 @@
+{
+  "name": "advent-of-code-2019",
+  "version": "1.0.0",
+  "description": "Advent of Code 2019 Solutions",
+  "main": "day1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgetson/advent-of-code-2019.git"
+  },
+  "author": "Dex Getson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dgetson/advent-of-code-2019/issues"
+  },
+  "homepage": "https://github.com/dgetson/advent-of-code-2019#readme",
+  "dependencies": {
+    "event-stream": "^4.0.1",
+    "fs": "0.0.1-security",
+    "stream": "0.0.2"
+  }
+}
