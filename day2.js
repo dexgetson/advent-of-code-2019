@@ -12,7 +12,7 @@ let CODE = 19690720;
 
 function performOptCodeAction(data, optCode, position1, position2) {
     let action = null;
-    
+
     switch (optCode) {
         case 1:
             action = optCode1(data[data[position1]], data[data[position2]]);
@@ -45,13 +45,16 @@ function haltProgram(program) {
     return 'stop';
 }
 
-function restoreGravityAssistProgram(data, position1, position2) {
+function restoreGravityAssistProgram(data, position1, position2, useNounVerb) {
 
-    console.log('noun:',NOUN, 'verb:', VERB );
-    // data[position1] = NOUN;
-    // data[position2] = VERB;
-    data[position1] = 12;
-    data[position2] = 2;
+    if (useNounVerb) {
+        console.log('noun:', NOUN, 'verb:', VERB);
+        data[position1] = NOUN;
+        data[position2] = VERB;
+    } else {
+        data[position1] = 12;
+        data[position2] = 2;
+    }
 
     return data;
 }
@@ -61,13 +64,13 @@ function restoreGravityAssistProgram(data, position1, position2) {
 //stocks and bonds
 //_ l _ _ _ ls
 
-function getOutput(){
+function getOutput() {
     // 100* noun + verb
     console.log('noun:', NOUN, 'verb:', VERB);
     return 100 * (NOUN + VERB);
 }
 
-function stepForwardNoun(){
+function stepForwardNoun() {
     NOUN += 1;
 }
 
@@ -75,26 +78,26 @@ function stepForwardVerb() {
     VERB += 1;
 }
 
-function stepNounVerbForward(){
-    if(NOUN < 99) {
+function stepNounVerbForward() {
+    if (NOUN < 99) {
         stepForwardNoun();
     } else {
         stepForwardVerb();
     }
-    if(VERB > 98){
+    if (VERB > 98) {
         console.log('--------Somthing went Wrong----------');
         return false;
-    } 
+    }
     return true;
 }
 
 function initProgram(data, matchCode = 0) {
-    let prog = restoreGravityAssistProgram(data,1,2);
+    let prog = restoreGravityAssistProgram(data, 1, 2);
     console.log('InitProgram');
-    runProgram(prog, 0, matchCode);   
+    runProgram(prog, 0, matchCode);
 }
 
-function runProgram(data, index, matchCode = 0){
+function runProgram(data, index, matchCode = 0) {
     let optCodePosition = index;
     let inputPosition1 = index + 1;
     let inputPosition2 = index + 2;
@@ -103,12 +106,12 @@ function runProgram(data, index, matchCode = 0){
     let optCode = data[optCodePosition];
 
     let result = performOptCodeAction(data, optCode, inputPosition1, inputPosition2);
-    if(result == 'stop' || result === 'error') {
+    if (result == 'stop' || result === 'error') {
         console.log('Program Finished!');
-        console.log('Result:',data[0]);
-        if(matchCode > 0 && matchCode !== data[0]){
+        console.log('Result:', data[0]);
+        if (matchCode > 0 && matchCode !== data[0]) {
             let isSuccess = stepNounVerbForward();
-            if(isSuccess){
+            if (isSuccess) {
                 console.log('run program again');
                 initProgram(PROGRAM, CODE);
             }
