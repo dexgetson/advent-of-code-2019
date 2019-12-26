@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { Transform } = require('stream');
 const es = require('event-stream');
 
 const readPuzzleFile = './puzzles/dayOne/puzzle2.json';
